@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<script type="text/javascript" src="d3.min.js"></script>
+	</head>
+	<body>
+		<script>
+			// initialize sample data to bind
+			var myData = [1,2,3,4,5];
+			// create svg viewport
+			var svgViewport = d3.select("body").append("svg").attr("width","400").attr("height", "400");
+			// binding svg elements to the svg viewport
+			var circleSelection = svgViewport.selectAll("circle").data(myData);			
+			var circleElements = circleSelection.enter().append("circle");
+			// function to pass values using __data__ 
+			function functionTwo(d,i) { return d * 25; };
+			// drawing circles
+			circleElements.attr("cx", functionTwo).attr("cy", functionTwo).attr("r", 25);
+			// function to style the color of circle based on index(odd or even)
+			function greenRed(d,i) { 
+				if (i%2 === 0) { return "green"; }
+				else { return "red"; }
+			}
+
+			var circleStyle = circleElements.style("fill", greenRed);
+		</script>
+	</body>
+</html>
