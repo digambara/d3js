@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<script type="text/javascript" src="d3.min.js"></script>
+	</head>
+	<body>
+		<script>
+			// define data array of json objects containing x and y values
+			myData = [ 	{ "x":05, "y":30   },{ "x": 75, "y":30  },
+						{ "x":75, "y":90   },{ "x":150, "y":90  },
+						{ "x":150, "y":150 },{ "x":190, "y":150 }];
+			// define d3 path data generator function
+			var lineFunction = d3.line()
+										.x(function(d) { return d.x; })
+										.y(function(d) { return d.y; })
+										;
+			// create svg viewport container
+			svgViewport = d3.select("body").append("svg").attr("width","200").attr("height","200");
+			// append path generated to the viewport
+			svgViewport.append("path")
+						.datum(myData) // this tells D3 that we want to bind the data to a single SVG element
+						.attr("d",lineFunction(myData))
+						.attr("stroke", "blue")
+						.attr("stroke-width", 2)
+						.attr("fill", "none");
+			
+		</script>
+			
+	</body>
+</html>
