@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<script type="text/javascript" src="d3.min.js"></script>
+	</head>
+	<body>
+		<script>
+			// define data array of json objects containing x and y values
+			myData = [ 	{ "x":05, "y":30   },{ "x": 75, "y":30  },
+						{ "x":75, "y":90   },{ "x":150, "y":90  },
+						{ "x":150, "y":150 },{ "x":190, "y":150 }];
+			// let us get max value from x
+			var maxX = d3.max(myData, function(d) { return d.x; });
+			// let us get max value from y
+			var maxY = d3.max(myData, function(d) { return d.y; });
+			// create dynamic svg coordinate space using the max values from array of json objects data
+			var svgViewport = d3.select("body")
+								.append("svg")
+								.attr("width", maxX)
+								.attr("height", maxY);
+			// select all the circle elements, bind the data, choose the enter selection and append circles
+			var circles = svgViewport.selectAll("circle").data(myData).enter().append("circle");
+			// add attributes to each circle
+			var circleAttributes = circles.attr("cx", function(d,i) { return d.x;})
+										.attr("cy", function(d,i) { return d.y;})
+										.attr("r",  "10");
+			
+		</script>
+			
+	</body>
+</html>
