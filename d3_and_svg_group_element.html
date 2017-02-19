@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<script type="text/javascript" src="d3.min.js"></script>
+	</head>
+	<body>
+		<script>
+			// defining svg selection	
+			var svgSelection = d3.select("body").append("svg").attr("width","200").attr("height","200");
+			// appending svg group element 
+			var groupSelection = svgSelection.append("g");
+			// adding two circle elements to svg group element
+			groupSelection.append("circle").attr("cx",20).attr("cy",20).attr("r",20);
+			groupSelection.append("circle").attr("cx",70).attr("cy",70).attr("r",20);
+			// adding two rectangle elements to svg
+			svgSelection.append("rect").attr("x",110).attr("y",110).attr("height",30).attr("width",30);
+			svgSelection.append("rect").attr("x",160).attr("y",160).attr("height",30).attr("width",30);
+			// adding attributes and values to the svg group element
+			groupSelection.attr("fill","purple");
+			var valueString = "translate(" + 10 + "," + 20 + ")";
+			groupSelection.attr("transform",valueString);			
+		</script>
+			
+	</body>
+</html>

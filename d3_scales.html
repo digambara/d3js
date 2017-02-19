@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<script type="text/javascript" src="d3.min.js"></script>
+	</head>
+	<body>
+		<script>
+			// define data array of json objects containing n and p values for x and y axes resp.
+			myData = [ {"n":  0, "p":  0},
+					   {"n":200, "p":200},
+					   {"n":300, "p":300},
+					   {"n":400, "p":400}];
+			// 	creating svg container with hard coded attributes	   
+			var svgContainer = d3.select("body").append("svg").attr("width", 200).attr("height", 200);
+			
+			// setting the range using svg container fixed attributes
+			var rangeSVGX = [0,200], rangeSVGY = [0,200];
+			
+			// using D3 Array Extent Funtionality to get the min and max in a single array
+			var domainN = d3.extent(myData, function(d) { return d.n });			
+			var domainP = d3.extent(myData, function(d) { return d.p });
+			
+			// defining scales using d3.scaleLinear() function
+			var xLineScale = d3.scaleLinear().domain(domainN).range(rangeSVGX);			
+			var yLineScale = d3.scaleLinear().domain(domainP).range(rangeSVGY);			
+			
+			// creating circle elements and adding attributes based on scaled data
+			var circleSelection = svgContainer.selectAll("circle").data(myData).enter().append("circle");			
+			var circleAttributes = circleSelection
+									.attr("cx", function(d,i) { return xLineScale(d.n) })
+									.attr("cy", function(d,i) { return yLineScale(d.p) })
+									.attr("r", "15");
+		</script>
+			
+	</body>
+</html>
