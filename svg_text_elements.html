@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<script type="text/javascript" src="d3.min.js"></script>
+	</head>
+	<body>
+		<script>
+			
+			// defining the dataset
+			dataSet = [	{"name":"Bezawada",		"population":18, "rank": 1},
+						{"name":"Thanjavur",	"population":11, "rank": 2},
+						{"name":"DaresSalaam",	"population": 8, "rank": 3},
+						{"name":"Ongole",		"population": 7, "rank": 4},
+						{"name":"Tangutur",		"population": 5, "rank": 5},
+						{"name":"Jayavaram",	"population": 4, "rank": 6}];
+			// adding an SVG Container	
+			var svgContainer = d3.select("body").append("svg").attr("width","400").attr("height","200");
+			// adding circles to the svg container and attaching the data
+			var circles = svgContainer.selectAll("circle").data(dataSet).enter().append("circle");	
+			circles.attr("cx", function(d,i) { return (i+1)*25; })
+				.attr("cy", function(d,i) { return (i+1)*25; })
+				.attr("r" , function(d,i) { return d.population });
+			// adding SVG Text labels to each circle based on the data
+			var circleLabels = svgContainer.selectAll("text").data(dataSet).enter().append("text");
+			circleLabels.attr("x", function(d,i) { return (i+2)*25; })
+					.attr("y", function(d,i) { return (i+1)*25; });
+			circleLabels.text(function(d,i) { return d.name; });
+			circleLabels.style("fill","red");
+			circleLabels.text(function(d,i) { return d.rank; });  // D3 text operator replaces the text
+			circleLabels.text(function(d,i) { return "Rank: " + d.rank + "; City: " + d.name; }); 
+		</script>
+			
+	</body>
+</html>
